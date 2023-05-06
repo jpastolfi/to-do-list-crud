@@ -4,7 +4,8 @@
   "description": "To do list",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./core/crud.js",
+    "start:crud": "npx ts-node ./core/crud.ts",
+    "dev:crud": "nodemon --ext ts,tsx --exec 'npm run start:crud'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +20,10 @@
   },
   "homepage": "https://github.com/jpastolfi/to-do-list-crud#readme",
   "devDependencies": {
+    "@types/node": "^20.1.0",
     "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "typescript": "^5.0.4"
   }
 }
