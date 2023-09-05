@@ -1,0 +1,24 @@
+{
+  "name": "to-do-list-crud",
+  "version": "1.0.0",
+  "description": "To do list CRUD",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpastolfi/to-do-list-crud.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpastolfi/to-do-list-crud/issues"
+  },
+  "homepage": "https://github.com/jpastolfi/to-do-list-crud#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
