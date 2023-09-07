@@ -73,16 +73,16 @@ export function GlobalStyles({ themeName }: { themeName?: ThemeName }) {
             .map(
               (key) => `
             --color-primary-${key}: ${
-                theme.primary[key as keyof typeof theme.primary]
-              };`
+              theme.primary[key as keyof typeof theme.primary]
+            };`,
             )
             .join("")}
           ${Object.keys(theme.neutral)
             .map(
               (key) => `
             --color-neutral-${key}: ${
-                theme.neutral[key as keyof typeof theme.neutral]
-              };`
+              theme.neutral[key as keyof typeof theme.neutral]
+            };`,
             )
             .join("")}
             ${Object.keys(theme.negative)
@@ -90,7 +90,7 @@ export function GlobalStyles({ themeName }: { themeName?: ThemeName }) {
               (key) => `
               --color-negative-${key}: ${
                 theme.negative[key as keyof typeof theme.negative]
-              };`
+              };`,
             )
             .join("")}
         }
@@ -157,10 +157,21 @@ export function GlobalStyles({ themeName }: { themeName?: ThemeName }) {
           }
         }
         body {
-          font-family: ui-sans-serif, system-ui, -apple-system,
-            BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
-            Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji,
-            Segoe UI Symbol, Noto Color Emoji;
+          font-family:
+            ui-sans-serif,
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            Segoe UI,
+            Roboto,
+            Helvetica Neue,
+            Arial,
+            Noto Sans,
+            sans-serif,
+            Apple Color Emoji,
+            Segoe UI Emoji,
+            Segoe UI Symbol,
+            Noto Color Emoji;
         }
         // [Header Area]
         header {
@@ -210,7 +221,8 @@ export function GlobalStyles({ themeName }: { themeName?: ThemeName }) {
           margin-top: 16px;
           display: flex;
           align-items: stretch;
-          box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px,
+          box-shadow:
+            rgb(255, 255, 255) 0px 0px 0px 0px,
             rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
             rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
             rgba(0, 0, 0, 0.1) 0px 1px 2px -1px;
@@ -284,7 +296,8 @@ export function GlobalStyles({ themeName }: { themeName?: ThemeName }) {
           padding: 16px 32px;
           padding-left: calc(16px + 2px + var(--iconSize));
           width: 100%;
-          box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px,
+          box-shadow:
+            rgb(255, 255, 255) 0px 0px 0px 0px,
             rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
             rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
             rgba(0, 0, 0, 0.1) 0px 1px 2px -1px;
@@ -309,7 +322,8 @@ export function GlobalStyles({ themeName }: { themeName?: ThemeName }) {
           margin: 0 auto;
           max-width: 600px;
           margin-top: 16px;
-          box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px,
+          box-shadow:
+            rgb(255, 255, 255) 0px 0px 0px 0px,
             rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
             rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
             rgba(0, 0, 0, 0.1) 0px 1px 2px -1px;
@@ -367,7 +381,8 @@ export function GlobalStyles({ themeName }: { themeName?: ThemeName }) {
           white-space: nowrap; /* Keeps the content on a single line */
           margin: 0 auto; /* Gives that scrolling effect as the typing happens */
           letter-spacing: 0.05em; /* Adjust as needed */
-          animation: typing 3s steps(40, end),
+          animation:
+            typing 3s steps(40, end),
             blink-caret 0.75s step-end infinite;
         }
         /* The typing effect */
