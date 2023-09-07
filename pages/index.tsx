@@ -1,11 +1,12 @@
-import { GlobalStyles } from '@ui/theme/GlobalStyles';
+import React from "react";
+import { GlobalStyles } from "@ui/theme/GlobalStyles";
 const bg = "/bg.jpeg";
 
 export default function Page() {
   return (
     <main>
       {/* Inside the GlobalStyles component, you can select the themeName you want for the page. */}
-      <GlobalStyles themeName='coolGrey'/>
+      <GlobalStyles themeName="coolGrey" />
       <header
         style={{
           backgroundImage: `url('${bg}')`,
@@ -15,14 +16,8 @@ export default function Page() {
           <h1>O que fazer hoje?</h1>
         </div>
         <form>
-          <input
-            type="text"
-            placeholder="Correr, Estudar..."
-          />
-          <button
-            type="submit"
-            aria-label="Adicionar novo item"
-          >
+          <input type="text" placeholder="Correr, Estudar..." />
+          <button type="submit" aria-label="Adicionar novo item">
             +
           </button>
         </form>
@@ -30,10 +25,7 @@ export default function Page() {
 
       <section>
         <form>
-          <input
-            type="text"
-            placeholder="Filtrar lista atual, ex: Dentista"
-          />
+          <input type="text" placeholder="Filtrar lista atual, ex: Dentista" />
         </form>
 
         <table border={1}>
@@ -51,21 +43,18 @@ export default function Page() {
           <tbody>
             <tr>
               <td>
-                <input
-                  type="checkbox"
-                />
+                <input type="checkbox" />
               </td>
               <td>d4f26</td>
               <td>
-                Conteúdo de uma TODO
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque vero facilis obcaecati, autem aliquid eius! Consequatur eaque doloribus laudantium soluta optio odit, provident, ab voluptates doloremque voluptas recusandae aspernatur aperiam.
+                Conteúdo de uma TODO Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Eaque vero facilis obcaecati, autem aliquid
+                eius! Consequatur eaque doloribus laudantium soluta optio odit,
+                provident, ab voluptates doloremque voluptas recusandae
+                aspernatur aperiam.
               </td>
               <td align="right">
-                <button
-                  data-type="delete"
-                >
-                  Apagar
-                </button>
+                <button data-type="delete">Apagar</button>
               </td>
             </tr>
 
@@ -83,9 +72,7 @@ export default function Page() {
 
             <tr>
               <td colSpan={4} align="center" style={{ textAlign: "center" }}>
-                <button
-                  data-type="load-more"
-                >
+                <button data-type="load-more">
                   Carregar mais{" "}
                   <span
                     style={{
@@ -99,10 +86,9 @@ export default function Page() {
                 </button>
               </td>
             </tr>
-
           </tbody>
         </table>
       </section>
     </main>
-  )
+  );
 }
