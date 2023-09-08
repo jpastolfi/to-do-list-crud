@@ -1,1 +1,16 @@
-Teste 3
+{
+  "todos": [
+    {
+      "id": "271d6381-9862-4f41-b141-33339667e84c",
+      "date": "2023-09-08T16:30:38.813Z",
+      "content": "Primeira TODO",
+      "done": false
+    },
+    {
+      "id": "e45dab2b-0b11-4035-b4fd-0bc37bd99262",
+      "date": "2023-09-08T16:30:38.813Z",
+      "content": "Atualizada!",
+      "done": false
+    }
+  ]
+}
