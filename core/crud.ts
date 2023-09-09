@@ -122,8 +122,5 @@ function CLEAR_DB() {
 // [SIMULATION]
 CLEAR_DB();
 create("Primeira TODO");
-const secondTodo = create("Segunda TODO");
-deleteById(secondTodo.id);
-const thirdTodo = create("Terceira TODO");
-updateContentById(thirdTodo.id, "Atualizada!");
-const todos = read();
+create("Segunda TODO");
+create("Terceira TODO");

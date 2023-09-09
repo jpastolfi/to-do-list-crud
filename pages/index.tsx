@@ -3,11 +3,16 @@ import { useState, useEffect } from "react";
 import { GlobalStyles } from "@ui/theme/GlobalStyles";
 import { todoController } from "@ui/controller/task";
 const bg = "/bg.jpeg";
+interface HomeTask {
+  id: string;
+  content: string;
+}
 
 export default function Page() {
-  const [tasks, setTasks] = useState([]);
+  const [page, setPage] = useState(1);
+  const [tasks, setTasks] = useState<HomeTask[]>([]);
   useEffect(() => {
-    todoController.get().then(({ allTasks }) => setTasks(allTasks));
+    todoController.get({ page }).then(({ tasks }) => setTasks(tasks));
   }, []);
 
   return (
@@ -73,10 +78,10 @@ export default function Page() {
               </td>
             </tr> */}
 
-            {/* <tr>
+            <tr>
               <td colSpan={4} align="center" style={{ textAlign: "center" }}>
-                <button data-type="load-more">
-                  Carregar mais{" "}
+                <button data-type="load-more" onClick={() => setPage(page + 1)}>
+                  Current page: {page} --- Load more{" "}
                   <span
                     style={{
                       display: "inline-block",
@@ -88,7 +93,7 @@ export default function Page() {
                   </span>
                 </button>
               </td>
-            </tr> */}
+            </tr>
           </tbody>
         </table>
       </section>
