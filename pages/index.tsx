@@ -17,15 +17,26 @@ export default function HomePage() {
   const [tasks, setTasks] = useState<HomeTask[]>([]);
   // If the total number of pages is higher than the current page, there are more pages to show
   const hasMorePages = totalPages > page;
+  // State to check if it's the first time loading the page
+  const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+  // State to check if the application has finished loading
+  const [isLoading, setIsLoading] = useState(true);
+  // Boolean to check if there are any tasks in the task list after loading is complete. Used to enable the 'No items found' section
+  const hasNoTasks = tasks.length === 0 && !isLoading;
 
   useEffect(() => {
-    // 1
-    todoController.get({ page }).then(({ tasks, pages }) => {
-      setTasks((oldTasks) => {
-        return [...oldTasks, ...tasks];
-      });
-      setTotalPages(pages);
-    });
+    setInitialLoadComplete(true);
+    if (!initialLoadComplete) {
+      todoController
+        .get({ page })
+        .then(({ tasks, pages }) => {
+          setTasks(tasks);
+          setTotalPages(pages);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
   }, [page]);
 
   return (
@@ -78,25 +89,40 @@ export default function HomePage() {
                 </td>
               </tr>
             ))}
-
-            {/* <tr>
-              <td colSpan={4} align="center" style={{ textAlign: "center" }}>
-                Carregando...
-              </td>
-            </tr> */}
-
-            {/* <tr>
-              <td colSpan={4} align="center">
-                Nenhum item encontrado
-              </td>
-            </tr> */}
-
+            {isLoading && (
+              <tr>
+                <td colSpan={4} align="center" style={{ textAlign: "center" }}>
+                  Carregando...
+                </td>
+              </tr>
+            )}
+            {/* Shows a message saying `No items found` if there are no task in the task list */}
+            {hasNoTasks && (
+              <tr>
+                <td colSpan={4} align="center">
+                  Nenhum item encontrado
+                </td>
+              </tr>
+            )}
             {hasMorePages && (
               <tr>
                 <td colSpan={4} align="center" style={{ textAlign: "center" }}>
                   <button
                     data-type="load-more"
-                    onClick={() => setPage(page + 1)}
+                    onClick={() => {
+                      setIsLoading(true);
+                      const nextPage = page + 1;
+                      setPage(nextPage);
+                      todoController
+                        .get({ page: nextPage })
+                        .then(({ tasks, pages }) => {
+                          setTasks((oldTasks) => {
+                            return [...oldTasks, ...tasks];
+                          });
+                          setTotalPages(pages);
+                        });
+                      setIsLoading(false);
+                    }}
                   >
                     Current page: {page} --- Load more{" "}
                     <span

@@ -8,7 +8,7 @@ const get = async ({ page }: GetParams) => {
   // 2
   return taskRepository.get({
     page,
-    limit: 10,
+    limit: 2,
   });
 };
 
