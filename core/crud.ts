@@ -6,7 +6,7 @@ const DB_FILE_PATH = "./core/db";
 type UUID = string;
 
 // type for each created task
-interface Todo {
+interface Task {
   id: UUID;
   date: string;
   content: string;
@@ -14,8 +14,8 @@ interface Todo {
 }
 
 // function to create a task
-function create(content: string): Todo {
-  const todo: Todo = {
+function create(content: string): Task {
+  const task: Task = {
     id: uuid(),
     // the date is going to be automatically inserted
     date: new Date().toISOString(),
@@ -24,42 +24,42 @@ function create(content: string): Todo {
     done: false,
   };
 
-  // creates an array of Todo to be saved
-  const todos: Array<Todo> = [...read(), todo];
+  // creates an array of Task to be saved
+  const tasks: Array<Task> = [...read(), task];
 
   // saves the array above in the file
   fs.writeFileSync(
     DB_FILE_PATH,
     JSON.stringify(
       {
-        todos,
+        tasks,
         dogs: [],
       },
       null,
       2,
     ),
   );
-  return todo;
+  return task;
 }
 
 // function to read all the tasks
-export function read(): Array<Todo> {
+export function read(): Array<Task> {
   const dbString = fs.readFileSync(DB_FILE_PATH, "utf-8");
   // return either the parsed tasks or an empty object (that would create an error due to JSON trying to parse undefined)
   const db = JSON.parse(dbString || "{}");
   // if there are no tasks, returns an empty array
-  if (!db.todos) {
+  if (!db.tasks) {
     return [];
   }
   // return the tasks
-  return db.todos;
+  return db.tasks;
 }
 
-// function to update a task. Receives the id (type UUID) of the task to be updated and an object typed as Partial<Todo>, meaning all attributes are optional.
-function update(id: UUID, partialTodo: Partial<Todo>): Todo {
+// function to update a task. Receives the id (type UUID) of the task to be updated and an object typed as Partial<Task>, meaning all attributes are optional.
+function update(id: UUID, partialTodo: Partial<Task>): Task {
   let updatedTodo;
-  const todos = read();
-  todos.forEach((currentTodo) => {
+  const tasks = read();
+  tasks.forEach((currentTodo) => {
     const isToUpdate = currentTodo.id === id;
     if (isToUpdate) {
       updatedTodo = Object.assign(currentTodo, partialTodo);
@@ -70,7 +70,7 @@ function update(id: UUID, partialTodo: Partial<Todo>): Todo {
     DB_FILE_PATH,
     JSON.stringify(
       {
-        todos,
+        tasks,
       },
       null,
       2,
@@ -85,7 +85,7 @@ function update(id: UUID, partialTodo: Partial<Todo>): Todo {
 }
 
 // function to update the content of a task. Receives the id (type UUID) of the task to be updated and a string, which is going to be the new content of the task
-function updateContentById(id: UUID, content: string): Todo {
+function updateContentById(id: UUID, content: string): Task {
   return update(id, {
     content,
   });
@@ -95,8 +95,8 @@ function updateContentById(id: UUID, content: string): Todo {
 function deleteById(id: UUID) {
   const todos = read();
 
-  const todosWithoutOne = todos.filter((todo) => {
-    if (id === todo.id) {
+  const todosWithoutOne = todos.filter((task) => {
+    if (id === task.id) {
       return false;
     }
     return true;
@@ -124,3 +124,5 @@ CLEAR_DB();
 create("Primeira TODO");
 create("Segunda TODO");
 create("Terceira TODO");
+create("Quarta TODO");
+create("Quinta TODO");

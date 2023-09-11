@@ -5,9 +5,10 @@ interface GetParams {
 }
 
 const get = async ({ page }: GetParams) => {
+  // 2
   return taskRepository.get({
-    page: page || 1,
-    limit: 1,
+    page,
+    limit: 10,
   });
 };
 

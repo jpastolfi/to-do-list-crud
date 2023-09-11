@@ -8,12 +8,25 @@ interface HomeTask {
   content: string;
 }
 
-export default function Page() {
+export default function HomePage() {
+  // State for the total amount of pages (tasks / tasks.length)
+  const [totalPages, setTotalPages] = useState(0);
+  // State for the current page
   const [page, setPage] = useState(1);
+  // State for all the tasks
   const [tasks, setTasks] = useState<HomeTask[]>([]);
+  // If the total number of pages is higher than the current page, there are more pages to show
+  const hasMorePages = totalPages > page;
+
   useEffect(() => {
-    todoController.get({ page }).then(({ tasks }) => setTasks(tasks));
-  }, []);
+    // 1
+    todoController.get({ page }).then(({ tasks, pages }) => {
+      setTasks((oldTasks) => {
+        return [...oldTasks, ...tasks];
+      });
+      setTotalPages(pages);
+    });
+  }, [page]);
 
   return (
     <main>
@@ -78,22 +91,27 @@ export default function Page() {
               </td>
             </tr> */}
 
-            <tr>
-              <td colSpan={4} align="center" style={{ textAlign: "center" }}>
-                <button data-type="load-more" onClick={() => setPage(page + 1)}>
-                  Current page: {page} --- Load more{" "}
-                  <span
-                    style={{
-                      display: "inline-block",
-                      marginLeft: "4px",
-                      fontSize: "1.2em",
-                    }}
+            {hasMorePages && (
+              <tr>
+                <td colSpan={4} align="center" style={{ textAlign: "center" }}>
+                  <button
+                    data-type="load-more"
+                    onClick={() => setPage(page + 1)}
                   >
-                    ↓
-                  </span>
-                </button>
-              </td>
-            </tr>
+                    Current page: {page} --- Load more{" "}
+                    <span
+                      style={{
+                        display: "inline-block",
+                        marginLeft: "4px",
+                        fontSize: "1.2em",
+                      }}
+                    >
+                      ↓
+                    </span>
+                  </button>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </section>
