@@ -14,7 +14,7 @@ interface Task {
 }
 
 // function to create a task
-function create(content: string): Task {
+export function create(content: string): Task {
   const task: Task = {
     id: uuid(),
     // the date is going to be automatically inserted

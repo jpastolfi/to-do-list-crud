@@ -1,4 +1,4 @@
-import { read } from "@db-crud-task";
+import { read, create } from "@db-crud-task";
 
 interface GetParams {
   page?: number;
@@ -33,6 +33,12 @@ const get = ({ page, limit }: GetParams = {}): GetOutput => {
   };
 };
 
+const createByContent = async (content: string): Promise<Task> => {
+  const newTask = create(content);
+  return newTask;
+};
+
 export const taskRepository = {
   get,
+  createByContent,
 };

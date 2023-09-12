@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 import { GlobalStyles } from "@ui/theme/GlobalStyles";
 import { taskController } from "@ui/controller/task";
@@ -17,8 +17,8 @@ export default function HomePage() {
   const [tasks, setTasks] = useState<HomeTask[]>([]);
   // If the total number of pages is higher than the current page, there are more pages to show
   const hasMorePages = totalPages > page;
-  // State to check if it's the first time loading the page
-  const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+  // Ref to check if it's the first time loading the page and avoid loading the tasks more than once on the first load
+  const initialLoadComplete = useRef(false);
   // State to check if the application has finished loading
   const [isLoading, setIsLoading] = useState(true);
   // State for filtering the tasks
@@ -30,8 +30,7 @@ export default function HomePage() {
   // Boolean to check if there are any tasks in the task list after loading is complete. Used to enable the 'No items found' section
   const hasNoTasks = currentTasks.length === 0 && !isLoading;
   useEffect(() => {
-    setInitialLoadComplete(true);
-    if (!initialLoadComplete) {
+    if (!initialLoadComplete.current) {
       taskController
         .get({ page })
         .then(({ tasks, pages }) => {
@@ -40,6 +39,7 @@ export default function HomePage() {
         })
         .finally(() => {
           setIsLoading(false);
+          initialLoadComplete.current = true;
         });
     }
   }, [page]);
