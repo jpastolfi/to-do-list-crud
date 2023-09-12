@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { GlobalStyles } from "@ui/theme/GlobalStyles";
-import { todoController } from "@ui/controller/task";
+import { taskController } from "@ui/controller/task";
 const bg = "/bg.jpeg";
 interface HomeTask {
   id: string;
@@ -21,13 +21,18 @@ export default function HomePage() {
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
   // State to check if the application has finished loading
   const [isLoading, setIsLoading] = useState(true);
+  // State for filtering the tasks
+  const [searchTerm, setSearchTerm] = useState("");
+  const currentTasks = taskController.filterTasksByContent<HomeTask>(
+    searchTerm,
+    tasks,
+  );
   // Boolean to check if there are any tasks in the task list after loading is complete. Used to enable the 'No items found' section
-  const hasNoTasks = tasks.length === 0 && !isLoading;
-
+  const hasNoTasks = currentTasks.length === 0 && !isLoading;
   useEffect(() => {
     setInitialLoadComplete(true);
     if (!initialLoadComplete) {
-      todoController
+      taskController
         .get({ page })
         .then(({ tasks, pages }) => {
           setTasks(tasks);
@@ -61,7 +66,13 @@ export default function HomePage() {
 
       <section>
         <form>
-          <input type="text" placeholder="Filtrar lista atual, ex: Dentista" />
+          <input
+            type="text"
+            placeholder="Filtrar lista atual, ex: Dentista"
+            onChange={function filterTasks(event) {
+              setSearchTerm(event.target.value);
+            }}
+          />
         </form>
 
         <table border={1}>
@@ -77,7 +88,7 @@ export default function HomePage() {
           </thead>
 
           <tbody>
-            {tasks.map(({ id, content }) => (
+            {currentTasks.map(({ id, content }) => (
               <tr key={id}>
                 <td>
                   <input type="checkbox" />
@@ -104,7 +115,7 @@ export default function HomePage() {
                 </td>
               </tr>
             )}
-            {hasMorePages && (
+            {hasMorePages && currentTasks.length > 0 && (
               <tr>
                 <td colSpan={4} align="center" style={{ textAlign: "center" }}>
                   <button
@@ -113,7 +124,7 @@ export default function HomePage() {
                       setIsLoading(true);
                       const nextPage = page + 1;
                       setPage(nextPage);
-                      todoController
+                      taskController
                         .get({ page: nextPage })
                         .then(({ tasks, pages }) => {
                           setTasks((oldTasks) => {
