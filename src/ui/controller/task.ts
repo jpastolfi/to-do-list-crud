@@ -1,4 +1,6 @@
 import { taskRepository } from "@ui/repository/task";
+import { Task } from "@ui/schema/Task";
+import { z as schema } from "zod";
 
 interface GetParams {
   page: number;
@@ -26,18 +28,20 @@ const filterTasksByContent = <Task>(
 interface CreateParams {
   content?: string;
   onError: () => void;
-  onSuccess: (task: unknown) => void;
+  onSuccess: (task: Task) => void;
 }
 
 const create = ({ content, onError, onSuccess }: CreateParams) => {
-  if (!content) return onError();
-  const newTask = {
-    id: "123456",
-    content,
-    date: new Date(),
-    done: false,
-  };
-  onSuccess(newTask);
+  const parsedParams = schema.string().nonempty().safeParse(content);
+  if (!parsedParams.success) return onError();
+  taskRepository
+    .createByContent(parsedParams.data)
+    .then((newTask) => {
+      onSuccess(newTask);
+    })
+    .catch(() => {
+      onError();
+    });
 };
 
 export const taskController = {

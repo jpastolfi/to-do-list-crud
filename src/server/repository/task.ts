@@ -21,7 +21,7 @@ interface GetOutput {
 const get = ({ page, limit }: GetParams = {}): GetOutput => {
   const currentPage = page || 1;
   const currentLimit = limit || 10;
-  const allTasks = read();
+  const allTasks = read().reverse();
   const startIndex = (currentPage - 1) * currentLimit;
   const endIndex = currentPage * currentLimit;
   const paginatedTasks = allTasks.slice(startIndex, endIndex);

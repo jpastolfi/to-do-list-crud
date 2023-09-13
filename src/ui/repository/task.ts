@@ -1,13 +1,8 @@
+import { Task, TaskSchema } from "@ui/schema/Task";
+import { z as schema } from "zod";
 interface GetParams {
   page: number;
   limit: number;
-}
-
-interface Task {
-  content: string;
-  date: Date;
-  done: boolean;
-  id: string;
 }
 
 interface GetOutput {
@@ -43,7 +38,7 @@ const parseTasksFromServer = (
           id,
           content,
           done: String(done).toLowerCase() === "true",
-          date: new Date(date),
+          date: date,
         };
       }),
     };
@@ -69,6 +64,35 @@ const get = ({ page, limit }: GetParams): Promise<GetOutput> => {
   );
 };
 
+const createByContent = async (content: string): Promise<Task> => {
+  const response = await fetch("/api/tasks", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      content,
+    }),
+  });
+  if (response.ok) {
+    const serverResponse = await response.json();
+    /* console.log(serverResponse);
+    const serverResponseSchema = schema.object({
+      task: TaskSchema,
+    });
+    console.log(serverResponseSchema);
+    const serverResponseParsed = serverResponseSchema.safeParse(serverResponse);
+    // Aqui dá success false
+    console.log(serverResponseParsed);
+    if (!serverResponseParsed.success) throw new Error("Failed to create task");
+    const task = serverResponseParsed.data.task; */
+    const task = serverResponse;
+    return task;
+  }
+  throw new Error("Failed to create task");
+};
+
 export const taskRepository = {
   get,
+  createByContent,
 };

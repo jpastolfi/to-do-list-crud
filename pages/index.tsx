@@ -31,6 +31,7 @@ export default function HomePage() {
   const hasNoTasks = currentTasks.length === 0 && !isLoading;
   // State for the content of a new task
   const [newTaskContent, setNewTaskContent] = useState("");
+
   useEffect(() => {
     if (!initialLoadComplete.current) {
       taskController
