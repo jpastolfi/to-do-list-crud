@@ -29,6 +29,8 @@ export default function HomePage() {
   );
   // Boolean to check if there are any tasks in the task list after loading is complete. Used to enable the 'No items found' section
   const hasNoTasks = currentTasks.length === 0 && !isLoading;
+  // State for the content of a new task
+  const [newTaskContent, setNewTaskContent] = useState("");
   useEffect(() => {
     if (!initialLoadComplete.current) {
       taskController
@@ -56,8 +58,31 @@ export default function HomePage() {
         <div className="typewriter">
           <h1>O que fazer hoje?</h1>
         </div>
-        <form>
-          <input type="text" placeholder="Correr, Estudar..." />
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            taskController.create({
+              content: newTaskContent,
+              onError() {
+                alert("You need to have a content to create a new task");
+              },
+              onSuccess(task: HomeTask) {
+                setTasks((oldTasks) => {
+                  return [task, ...oldTasks];
+                });
+                setNewTaskContent("");
+              },
+            });
+          }}
+        >
+          <input
+            type="text"
+            placeholder="Correr, Estudar..."
+            value={newTaskContent}
+            onChange={(event) => {
+              setNewTaskContent(event.target.value);
+            }}
+          />
           <button type="submit" aria-label="Adicionar novo item">
             +
           </button>

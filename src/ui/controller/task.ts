@@ -23,7 +23,25 @@ const filterTasksByContent = <Task>(
   });
 };
 
+interface CreateParams {
+  content?: string;
+  onError: () => void;
+  onSuccess: (task: unknown) => void;
+}
+
+const create = ({ content, onError, onSuccess }: CreateParams) => {
+  if (!content) return onError();
+  const newTask = {
+    id: "123456",
+    content,
+    date: new Date(),
+    done: false,
+  };
+  onSuccess(newTask);
+};
+
 export const taskController = {
   get,
   filterTasksByContent,
+  create,
 };
