@@ -1,4 +1,4 @@
-import { read, create } from "@db-crud-task";
+import { read, create, update } from "@db-crud-task";
 
 interface GetParams {
   page?: number;
@@ -38,7 +38,19 @@ const createByContent = async (content: string): Promise<Task> => {
   return newTask;
 };
 
+const toggleDone = async (taskId: string): Promise<Task> => {
+  const allTasks = read();
+  const task = allTasks.find(({ id }) => id === taskId);
+  if (!task) throw new Error(`Id ${taskId} not found`);
+
+  const updatedTask = update(taskId, {
+    done: !task.done,
+  });
+  return updatedTask;
+};
+
 export const taskRepository = {
   get,
   createByContent,
+  toggleDone,
 };

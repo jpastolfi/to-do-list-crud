@@ -50,7 +50,26 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
   return res.status(201).json(createdTask);
 };
 
+const toggleDone = async (req: NextApiRequest, res: NextApiResponse) => {
+  const taskId = req.query.id;
+
+  if (!taskId || typeof taskId !== "string")
+    return res
+      .status(400)
+      .json({ error: { message: "You must provide a string Id" } });
+  try {
+    const updatedTask = await taskRepository.toggleDone(taskId);
+    res.status(200).json({
+      task: updatedTask,
+    });
+  } catch (e) {
+    if (e instanceof Error)
+      return res.status(404).json({ error: { message: e.message } });
+  }
+};
+
 export const taskController = {
   get,
   create,
+  toggleDone,
 };
