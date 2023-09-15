@@ -80,7 +80,6 @@ const createByContent = async (content: string): Promise<Task> => {
     const serverResponseSchema = schema.object({
       task: TaskSchema,
     });
-    console.log(serverResponseSchema);
     const serverResponseParsed = serverResponseSchema.safeParse(serverResponse);
     // Aqui dá success false
     console.log(serverResponseParsed);
@@ -92,7 +91,28 @@ const createByContent = async (content: string): Promise<Task> => {
   throw new Error("Failed to create task");
 };
 
+const toggleDone = async (id: string): Promise<Task> => {
+  const response = await fetch(`/api/tasks/${id}/toggle-done`, {
+    method: "PUT",
+  });
+  if (response.ok) {
+    const serverResponse = await response.json();
+    /* const serverResponseSchema = schema.object({
+      task: TaskSchema,
+    });
+    const serverResponseParsed = serverResponseSchema.safeParse(serverResponse);
+    if (!serverResponseParsed.success) throw new Error("Failed to update task");
+    const updatedTask = serverResponseParsed.data.task; */
+    const updatedTask = serverResponse;
+    /* console.log(updatedTask.task.done); */
+
+    return updatedTask;
+  }
+  throw new Error("Server error");
+};
+
 export const taskRepository = {
   get,
   createByContent,
+  toggleDone,
 };
