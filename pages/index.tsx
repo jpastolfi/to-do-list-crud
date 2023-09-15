@@ -6,6 +6,7 @@ const bg = "/bg.jpeg";
 interface HomeTask {
   id: string;
   content: string;
+  done: boolean;
 }
 
 export default function HomePage() {
@@ -114,13 +115,37 @@ export default function HomePage() {
           </thead>
 
           <tbody>
-            {currentTasks.map(({ id, content }) => (
+            {currentTasks.map(({ id, content, done }) => (
               <tr key={id}>
                 <td>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    checked={done}
+                    onChange={function handleToggle() {
+                      taskController.toggleDone({
+                        id,
+                        onError() {
+                          alert("Failed to update task");
+                        },
+                        updateTasksOnScreen() {
+                          setTasks((currentTasks) => {
+                            return currentTasks.map((task) => {
+                              if (task.id === id) {
+                                return {
+                                  ...task,
+                                  done: !task.done,
+                                };
+                              }
+                              return task;
+                            });
+                          });
+                        },
+                      });
+                    }}
+                  />
                 </td>
                 <td>{id.substring(0, 4)}</td>
-                <td>{content}</td>
+                <td>{!done ? content : <s>{content}</s>}</td>
                 <td align="right">
                   <button data-type="delete">Apagar</button>
                 </td>

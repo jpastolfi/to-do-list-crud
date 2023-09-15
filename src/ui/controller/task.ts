@@ -44,8 +44,26 @@ const create = ({ content, onError, onSuccess }: CreateParams) => {
     });
 };
 
+interface ToggleDoneParams {
+  id: string;
+  updateTasksOnScreen: () => void;
+  onError: () => void;
+}
+
+const toggleDone = ({ id, updateTasksOnScreen, onError }: ToggleDoneParams) => {
+  taskRepository
+    .toggleDone(id)
+    .then(() => {
+      updateTasksOnScreen();
+    })
+    .catch(() => {
+      onError();
+    });
+};
+
 export const taskController = {
   get,
   filterTasksByContent,
   create,
+  toggleDone,
 };

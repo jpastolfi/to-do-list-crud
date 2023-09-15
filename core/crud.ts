@@ -56,7 +56,7 @@ export function read(): Array<Task> {
 }
 
 // function to update a task. Receives the id (type UUID) of the task to be updated and an object typed as Partial<Task>, meaning all attributes are optional.
-function update(id: UUID, partialTodo: Partial<Task>): Task {
+export function update(id: UUID, partialTodo: Partial<Task>): Task {
   let updatedTodo;
   const tasks = read();
   tasks.forEach((currentTodo) => {
@@ -93,9 +93,9 @@ function updateContentById(id: UUID, content: string): Task {
 
 // function to delete a task. Receives the id (type UUID) of the task to be deleted
 function deleteById(id: UUID) {
-  const todos = read();
+  const tasks = read();
 
-  const todosWithoutOne = todos.filter((task) => {
+  const todosWithoutOne = tasks.filter((task) => {
     if (id === task.id) {
       return false;
     }
@@ -106,7 +106,7 @@ function deleteById(id: UUID) {
     DB_FILE_PATH,
     JSON.stringify(
       {
-        todos: todosWithoutOne,
+        tasks: todosWithoutOne,
       },
       null,
       2,
