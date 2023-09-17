@@ -1,4 +1,10 @@
-import { read, create, update } from "@db-crud-task";
+import {
+  read,
+  create,
+  update,
+  deleteById as DBdeleteById,
+} from "@db-crud-task";
+import { HttpNotFoundError } from "@server/infra/errors";
 
 interface GetParams {
   page?: number;
@@ -41,7 +47,7 @@ const createByContent = async (content: string): Promise<Task> => {
 const toggleDone = async (taskId: string): Promise<Task> => {
   const allTasks = read();
   const task = allTasks.find(({ id }) => id === taskId);
-  if (!task) throw new Error(`Id ${taskId} not found`);
+  if (!task) throw new HttpNotFoundError(`Id ${taskId} not found`);
 
   const updatedTask = update(taskId, {
     done: !task.done,
@@ -49,8 +55,16 @@ const toggleDone = async (taskId: string): Promise<Task> => {
   return updatedTask;
 };
 
+const deleteById = async (id: string) => {
+  const allTasks = read();
+  const task = allTasks.find((task) => task.id === id);
+  if (!task) throw new HttpNotFoundError(`Task with id ${id} not found`);
+  DBdeleteById(id);
+};
+
 export const taskRepository = {
   get,
   createByContent,
   toggleDone,
+  deleteById,
 };

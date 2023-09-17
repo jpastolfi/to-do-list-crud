@@ -92,7 +92,7 @@ function updateContentById(id: UUID, content: string): Task {
 }
 
 // function to delete a task. Receives the id (type UUID) of the task to be deleted
-function deleteById(id: UUID) {
+export function deleteById(id: UUID) {
   const tasks = read();
 
   const todosWithoutOne = tasks.filter((task) => {
