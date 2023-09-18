@@ -79,13 +79,18 @@ export default function HomePage() {
         >
           <input
             type="text"
+            name="add-task-input"
             placeholder="Correr, Estudar..."
             value={newTaskContent}
             onChange={(event) => {
               setNewTaskContent(event.target.value);
             }}
           />
-          <button type="submit" aria-label="Adicionar novo item">
+          <button
+            name="add-task-btn"
+            type="submit"
+            aria-label="Adicionar novo item"
+          >
             +
           </button>
         </form>
