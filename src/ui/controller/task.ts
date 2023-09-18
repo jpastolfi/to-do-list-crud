@@ -61,9 +61,14 @@ const toggleDone = ({ id, updateTasksOnScreen, onError }: ToggleDoneParams) => {
     });
 };
 
+const deleteById = async (id: string) => {
+  taskRepository.deleteById(id);
+};
+
 export const taskController = {
   get,
   filterTasksByContent,
   create,
   toggleDone,
+  deleteById,
 };

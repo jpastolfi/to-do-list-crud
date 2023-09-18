@@ -147,7 +147,25 @@ export default function HomePage() {
                 <td>{id.substring(0, 4)}</td>
                 <td>{!done ? content : <s>{content}</s>}</td>
                 <td align="right">
-                  <button data-type="delete">Apagar</button>
+                  <button
+                    data-type="delete"
+                    onClick={() => {
+                      taskController
+                        .deleteById(id)
+                        .then(() => {
+                          setTasks((currentTasks) =>
+                            currentTasks.filter(
+                              (currentTask) => currentTask.id !== id,
+                            ),
+                          );
+                        })
+                        .catch(() => {
+                          console.error("Erro");
+                        });
+                    }}
+                  >
+                    Apagar
+                  </button>
                 </td>
               </tr>
             ))}

@@ -111,8 +111,18 @@ const toggleDone = async (id: string): Promise<Task> => {
   throw new Error("Server error");
 };
 
+const deleteById = async (id: string) => {
+  const response = await fetch(`/api/tasks/${id}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) {
+    throw new Error("Failed to delete");
+  }
+};
+
 export const taskRepository = {
   get,
   createByContent,
   toggleDone,
+  deleteById,
 };

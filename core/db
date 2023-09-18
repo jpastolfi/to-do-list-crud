@@ -1,34 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": "8d7c9254-9759-4f56-803e-3ec506aa89f2",
-      "date": "2023-09-15T15:50:38.064Z",
-      "content": "Primeira TODO",
-      "done": false
-    },
-    {
-      "id": "05f4e64b-1ca5-4306-bdf9-94dcba1b06a3",
-      "date": "2023-09-15T15:50:38.064Z",
-      "content": "Segunda TODO",
-      "done": false
-    },
-    {
-      "id": "b8fa4634-a39e-4cd3-ab60-f6f70bfee3fd",
-      "date": "2023-09-15T15:50:38.064Z",
-      "content": "Terceira TODO",
-      "done": false
-    },
-    {
-      "id": "fc8b1a91-ad97-4a5b-bb04-8f8714d42e47",
-      "date": "2023-09-15T15:50:38.065Z",
-      "content": "Quarta TODO",
-      "done": false
-    },
-    {
-      "id": "9e64c722-4068-45ca-9ae5-458b4b03224a",
-      "date": "2023-09-15T15:50:38.065Z",
-      "content": "Quinta TODO",
-      "done": false
-    }
-  ]
+  "tasks": []
 }

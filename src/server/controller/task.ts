@@ -1,3 +1,4 @@
+import { HttpNotFoundError } from "@server/infra/errors";
 import { taskRepository } from "@server/repository/task";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z as schema } from "zod";
@@ -68,8 +69,40 @@ const toggleDone = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
+const deleteById = async (req: NextApiRequest, res: NextApiResponse) => {
+  const QuerySchema = schema.object({
+    id: schema.string().uuid().nonempty(),
+  });
+  const parsedQuery = QuerySchema.safeParse(req.query);
+  if (!parsedQuery.success) {
+    return res.status(400).json({
+      error: {
+        message: "You must provide a valid id",
+      },
+    });
+  }
+  try {
+    const id = parsedQuery.data.id;
+    await taskRepository.deleteById(id);
+    res.status(204).end();
+  } catch (e) {
+    if (e instanceof HttpNotFoundError)
+      return res.status(400).json({
+        error: {
+          message: e.message,
+        },
+      });
+    return res.status(500).json({
+      error: {
+        message: `Internal server error`,
+      },
+    });
+  }
+};
+
 export const taskController = {
   get,
   create,
   toggleDone,
+  deleteById,
 };
