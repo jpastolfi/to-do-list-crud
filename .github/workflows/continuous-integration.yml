@@ -1,0 +1,25 @@
+name: "[CI] Continuous Integration"
+# Every time there's a commit or a pull request is opened:
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Install Dependencies"
+        run: "npm install"
+      - name: "Linter check"
+        run: "npm run lint"
+  test:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node18.12.0-chrome107
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Install Dependencies"
+        run: "npm install"
+      - name: "Run the tests"
+        run: "npm run test"
