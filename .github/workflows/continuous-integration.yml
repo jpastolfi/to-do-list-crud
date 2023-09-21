@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Linter check"
-        run: "echo 'Checking for linter errors'"
+        run: "npm run lint"
 
     
