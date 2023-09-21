@@ -12,6 +12,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: "Debug"
         run: "ls -la"
+      - name: "Install Dependencies"
+        run: "npm install"
       - name: "Linter check"
         run: "npm run lint"
 
