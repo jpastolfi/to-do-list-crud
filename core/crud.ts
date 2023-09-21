@@ -85,7 +85,7 @@ export function update(id: UUID, partialTodo: Partial<Task>): Task {
 }
 
 // function to update the content of a task. Receives the id (type UUID) of the task to be updated and a string, which is going to be the new content of the task
-function updateContentById(id: UUID, content: string): Task {
+export function updateContentById(id: UUID, content: string): Task {
   return update(id, {
     content,
   });
