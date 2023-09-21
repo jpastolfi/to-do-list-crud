@@ -1,0 +1,15 @@
+name: "[CI] Continuous Integration"
+# Every time there's a commit or a pull request is opened:
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Linter check"
+        run: "echo 'Checking for linter errors'"
+
+    
