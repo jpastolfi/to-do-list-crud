@@ -12,7 +12,7 @@ As it was mentioned earlier, this is going to be a to do list. In it you'll be a
 - Delete tasks
 -- By clicking the "Delete" button, you can delete tasks from the list
 - Alter the color schema of the page
--- By choosing an item from the dropdown list, you can change the color schema of the page
+-- By choosing an item from the dropdown list, you can change the color schema of the page.
 
 # Testing
 The application has been tested using Cypress. The tests are located inside cypress/e2e.
