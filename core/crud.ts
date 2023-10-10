@@ -115,14 +115,14 @@ export function deleteById(id: UUID) {
 }
 
 // function to clear the entire database of tasks. Effectively it just writes an empty string in the database file
-function CLEAR_DB() {
+/* function CLEAR_DB() {
   fs.writeFileSync(DB_FILE_PATH, "");
-}
+} */
 
 // [SIMULATION]
-CLEAR_DB();
+/* CLEAR_DB();
 create("Primeira TODO");
 create("Segunda TODO");
 create("Terceira TODO");
 create("Quarta TODO");
-create("Quinta TODO");
+create("Quinta TODO"); */

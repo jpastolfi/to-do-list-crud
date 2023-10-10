@@ -84,9 +84,9 @@ const createByContent = async (content: string): Promise<Task> => {
     // Aqui dá success false
     console.log(serverResponseParsed);
     if (!serverResponseParsed.success) throw new Error("Failed to create task");
-    const task = serverResponseParsed.data.task; */
-    const task = serverResponse;
-    return task;
+    const task = serverResponseParsed.data.task;
+    return task; */
+    return serverResponse;
   }
   throw new Error("Failed to create task");
 };
@@ -102,11 +102,11 @@ const toggleDone = async (id: string): Promise<Task> => {
     });
     const serverResponseParsed = serverResponseSchema.safeParse(serverResponse);
     if (!serverResponseParsed.success) throw new Error("Failed to update task");
-    const updatedTask = serverResponseParsed.data.task; */
-    const updatedTask = serverResponse;
-    /* console.log(updatedTask.task.done); */
+    const updatedTask = serverResponseParsed.data.task;
+    console.log(updatedTask.task.done);
 
-    return updatedTask;
+    return updatedTask; */
+    return serverResponse;
   }
   throw new Error("Server error");
 };

@@ -1,0 +1,22 @@
+name: "[CD] Continuous Delivery"
+# Every time there's a commit or a pull request is opened:
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  VERCEL_ORG_ID: VXyv80ChpoM4Gq4MHfdm3rqC
+  VERCEL_PROJECT_ID: prj_UTPkKZAVLebSOhMjBoIWcxdKQOtI
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Debug"
+        run: "ls -la"
+      - name: "Install dependencies"
+        run: "npm install"
+      - name: "Deploy"
+        run: "npx vercel --prod --token=${{secrets.VERCEL_TOKEN}}"

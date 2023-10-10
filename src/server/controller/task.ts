@@ -26,7 +26,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const { totalTasks, tasks, pages } = taskRepository.get({
+  const { totalTasks, tasks, pages } = await taskRepository.get({
     page,
     limit,
   });
@@ -47,8 +47,14 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
         description: body.error.issues,
       },
     });
-  const createdTask = await taskRepository.createByContent(body.data.content);
-  return res.status(201).json(createdTask);
+  try {
+    const createdTask = await taskRepository.createByContent(body.data.content);
+    return res.status(201).json(createdTask);
+  } catch {
+    return res
+      .status(400)
+      .json({ error: { message: "Failed to create task" } });
+  }
 };
 
 const toggleDone = async (req: NextApiRequest, res: NextApiResponse) => {
