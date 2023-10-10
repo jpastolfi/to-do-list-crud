@@ -19,4 +19,4 @@ jobs:
       - name: "Install dependencies"
         run: "npm install"
       - name: "Deploy"
-        run: "npx vercel --prod --token=bmAX80n5gmA6E2ZvsoiHJTzP"
+        run: "npx vercel --prod --token=${{secrets.VERCEL_TOKEN}}"
