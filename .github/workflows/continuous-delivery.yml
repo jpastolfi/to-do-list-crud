@@ -6,8 +6,7 @@ on:
     types: [opened, synchronize]
 
 env:
-  VERCEL_TOKEN: bmAX80n5gmA6E2ZvsoiHJTzP
-  VERCEL_ORD_ID: VXyv80ChpoM4Gq4MHfdm3rqC
+  VERCEL_ORG_ID: VXyv80ChpoM4Gq4MHfdm3rqC
   VERCEL_PROJECT_ID: prj_UTPkKZAVLebSOhMjBoIWcxdKQOtI
 
 jobs:
@@ -20,4 +19,4 @@ jobs:
       - name: "Install dependencies"
         run: "npm install"
       - name: "Deploy"
-        run: "npx vercel --prod"
+        run: "npx vercel --prod --token=bmAX80n5gmA6E2ZvsoiHJTzP"
