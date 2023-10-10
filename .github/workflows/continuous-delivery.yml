@@ -2,8 +2,8 @@ name: "[CD] Continuous Delivery"
 # Every time there's a commit or a pull request is opened:
 
 on:
-  pull_request:
-    types: [opened, synchronize]
+  push:
+    branches: [ main ]
 
 env:
   VERCEL_ORG_ID: VXyv80ChpoM4Gq4MHfdm3rqC
