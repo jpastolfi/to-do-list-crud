@@ -58,7 +58,7 @@ export default function HomePage() {
         }}
       >
         <div className="typewriter">
-          <h1>O que fazer hoje?</h1>
+          <h1>What should I do today?</h1>
         </div>
         <form
           onSubmit={(event) => {
@@ -80,17 +80,13 @@ export default function HomePage() {
           <input
             type="text"
             name="add-task-input"
-            placeholder="Correr, Estudar..."
+            placeholder="Run, study..."
             value={newTaskContent}
             onChange={(event) => {
               setNewTaskContent(event.target.value);
             }}
           />
-          <button
-            name="add-task-btn"
-            type="submit"
-            aria-label="Adicionar novo item"
-          >
+          <button name="add-task-btn" type="submit" aria-label="Add new task">
             +
           </button>
         </form>
@@ -100,7 +96,7 @@ export default function HomePage() {
         <form>
           <input
             type="text"
-            placeholder="Filtrar lista atual, ex: Dentista"
+            placeholder="Filter current list, ex: Buy"
             onChange={function filterTasks(event) {
               setSearchTerm(event.target.value);
             }}
@@ -165,7 +161,7 @@ export default function HomePage() {
                           );
                         })
                         .catch(() => {
-                          console.error("Erro");
+                          console.error("Error");
                         });
                     }}
                   >
