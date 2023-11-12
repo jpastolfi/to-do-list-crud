@@ -24,7 +24,7 @@ describe("/ - Task feed", () => {
     const addTaskInput = "input[name=add-task-input]";
     cy.get(addTaskInput).as("$addTaskInput").type("Test task");
     // 4 - Clicks the button to add a task
-    const addTaskBtn = "[aria-label='Adicionar novo item']";
+    const addTaskBtn = "[aria-label='Add new task']";
     cy.get(addTaskBtn).click();
     // 5 - Checks if there's a new task in the list
     cy.get("table > tbody").contains("Test task");
