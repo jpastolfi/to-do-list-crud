@@ -110,7 +110,7 @@ export default function HomePage() {
                 <input type="checkbox" disabled />
               </th>
               <th align="left">Id</th>
-              <th align="left">Conteúdo</th>
+              <th align="left">Content</th>
               <th />
             </tr>
           </thead>
@@ -181,7 +181,7 @@ export default function HomePage() {
             {hasNoTasks && (
               <tr>
                 <td colSpan={4} align="center">
-                  Nenhum item encontrado
+                  No tasks found
                 </td>
               </tr>
             )}
