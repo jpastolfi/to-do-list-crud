@@ -165,7 +165,7 @@ export default function HomePage() {
                         });
                     }}
                   >
-                    Apagar
+                    Delete
                   </button>
                 </td>
               </tr>
