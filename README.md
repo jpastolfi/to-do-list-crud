@@ -2,6 +2,8 @@
 
 Hi! This is going to be a to do list created using JavaScipt, TypeScript and Next, along with several other libraries. It's been developed by [me] using [Mario's] CRUD course as a guidance. I hope you enjoy it and find it useful.
 
+The deployed version can be accessed through this [link].
+
 # Features
 As it was mentioned earlier, this is going to be a to do list. In it you'll be able to:
 
@@ -33,3 +35,4 @@ The project is responsive, meaning you can use it both from a notebook and from 
 [uuid]: <https://www.npmjs.com/package/uuid>
 [me]: <https://www.linkedin.com/in/jpastolfi/>
 [Mario's]: <https://github.com/omariosouto/>
+[link]: <https://to-do-list-crud-one.vercel.app/>
