@@ -10,7 +10,7 @@ const get = async ({ page }: GetParams) => {
   // 2
   return taskRepository.get({
     page,
-    limit: 2,
+    limit: 6,
   });
 };
 
